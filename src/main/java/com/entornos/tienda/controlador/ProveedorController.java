@@ -36,7 +36,7 @@ public class ProveedorController {
     }
     
     //buscar proveedor
-    @PostMapping("/list/proveedores/{id}")
+    @GetMapping("/list/proveedores/{id}")
     public Proveedor buscarPorId(@PathVariable Long id) {
         return proveedorService.buscaProveedor(id);
     }
