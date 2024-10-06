@@ -33,7 +33,7 @@ function loadData(){
 
 //funcion para actualizar los datos de un proveedor
 function loadProveedor(idproveedor){
-    let request = sendRequest('list/proveedores/'+idproveedor, 'GET', '');
+    let request = sendRequest('list/proveedores/'+idproveedor, 'GET', '')
     let ciudad = document.getElementById('proveedor-ciudad')
     let id = document.getElementById('proveedor-id')
     let nit = document.getElementById('proveedor-nit')
@@ -56,26 +56,43 @@ function loadProveedor(idproveedor){
     }
 }
 
-//Funcion para guardar un proveedor
+
+// Función para guardar un proveedor
 function saveProveedor(){
-    let ciudad = document.getElementById('proveedor-ciudad')
-    let id = document.getElementById('proveedor-id')
-    let nit = document.getElementById('proveedor-nit')
-    let nombre = document.getElementById('proveedor-nombre')
-    let telefono = document.getElementById('proveedor-telefono')
-    let direccion = document.getElementById('proveedor-direccion')
-    let data = {"id":id, "ciudad":ciudad, "direccion":direccion, "nombre":nombre, 
-        "telefono":telefono,"nit":nit}
-    console.log(data);
-    let request = sendRequest('proveedor/agregar', id ? 'PUT': 'POST', data)
+    let ciudad = document.getElementById('proveedor-ciudad').value;
+    let id = document.getElementById('proveedor-id').value;
+    let nit = document.getElementById('proveedor-nit').value;
+    let nombre = document.getElementById('proveedor-nombre').value;
+    let telefono = document.getElementById('proveedor-telefono').value;
+    let direccion = document.getElementById('proveedor-direccion').value;
+
+    // Crear el objeto con los datos del proveedor
+    let data = {
+        "id": id, 
+        "ciudad": ciudad, 
+        "direccion": direccion, 
+        "nombre": nombre, 
+        "telefono": telefono, 
+        "nit": nit
+    };
+
+    // Verificar si el ID existe, si es así se editará, de lo contrario se agregará
+    let url = id ? `proveedor/editar/${id}` : 'proveedor/agregar';
+    let method = id ? 'PUT' : 'POST';
+
+    // Llamar a la función sendRequest con la URL y método correctos
+    let request = sendRequest(url, method, data);
+    
     request.onload = function() {
-        alert('Proveedor creado o actualizado con Exito.');
+        alert('Proveedor creado o actualizado con éxito.');
         window.location = 'proveedores.html';
     }
+
     request.onerror = function() {
-        alert('Error al guardar los cambios.')
+        alert('Error al guardar los cambios.');
     }
 }
+
 
 function deleteProveedor(){
     let id = document.getElementById('proveedor-id').value

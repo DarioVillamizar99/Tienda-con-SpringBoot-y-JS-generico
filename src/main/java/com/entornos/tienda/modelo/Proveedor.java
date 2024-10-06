@@ -26,7 +26,7 @@ public class Proveedor {
     @NotNull(message="Este campo no puede ser nulo")
     @NotEmpty(message = "Este campo no puede estar vacío")
     @NotBlank(message = "Este campo no puede estar en blanco")
-    @Pattern(regexp = "^[a-zA-Z]+$", message = "El campo solo debe contener letras")
+    @Pattern(regexp = "^[a-zA-Z\\s]+$", message = "El campo solo debe contener letras y espacios")
     @Column(name="ciudad")
     private String ciudad;
 
@@ -39,7 +39,7 @@ public class Proveedor {
     @NotNull(message="Este campo no puede ser nulo")
     @NotEmpty(message = "Este campo no puede estar vacío")
     @NotBlank(message = "Este campo no puede estar en blanco")
-    @Pattern(regexp = "^[a-zA-Z]+$", message = "El campo solo debe contener letras")
+    @Pattern(regexp = "^[a-zA-Z\\s]+$", message = "El campo solo debe contener letras y espacios")
     @Column(name="nombre")
     private String nombre;
     
