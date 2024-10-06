@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.entornos.tienda.modelo.Producto;
 import com.entornos.tienda.servicio.ProductoService;
 
+import jakarta.validation.Valid;
+
 
 @RestController
 public class ProductoController {
@@ -36,14 +38,14 @@ public class ProductoController {
     }
     //agregar producto
     @PostMapping("/producto/agregar")
-    public ResponseEntity<Producto> agregarProducto(@RequestBody Producto producto) {
+    public ResponseEntity<Producto> agregarProducto(@Valid @RequestBody Producto producto) {
         Producto obj = productoService.nuevoProducto(producto);
         return new ResponseEntity<>(obj, HttpStatus.OK);
     }
     
     //actualizar cliente
     @PutMapping("/producto/actualizar")
-    public ResponseEntity<Producto> editarProducto(@RequestBody Producto producto) {
+    public ResponseEntity<Producto> editarProducto(@Valid @RequestBody Producto producto) {
         Producto obj = productoService.buscarProducto(producto.getId());
         if (obj != null) {
             obj.setIdProveedor(producto.getIdProveedor());
